@@ -77,7 +77,9 @@ const JsonFileUpload = () => {
           <h3>Uploaded: {uploadedData.ed_name}</h3>
           <p>Code: {uploadedData.ed_code}</p>
           <p>Valid Votes: {uploadedData.summary?.valid?.toLocaleString()}</p>
-          <p>Turnout: {uploadedData.summary?.percent_polled}%</p>
+          <p>Rejected Votes: {uploadedData.summary?.rejected?.toLocaleString()}</p>
+          <p>Total Polled: {uploadedData.summary?.polled?.toLocaleString()}</p>
+          <p>Percent Polled: {uploadedData.summary?.percent_polled}%</p>
           <p>Parties: {uploadedData.by_party?.length}</p>
 
           <div style={{ maxHeight: '200px', overflowY: 'auto', marginTop: '10px' }}>
