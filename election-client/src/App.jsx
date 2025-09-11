@@ -57,8 +57,9 @@ const ElectoralDataViewer = () => {
             <div style={{ marginBottom: '20px' }}>
               <h3>Summary</h3>
               <p>Valid Votes: {selected.summary?.valid?.toLocaleString()}</p>
+              <p>Rejected Votes: {selected.summary?.rejected?.toLocaleString()}</p>
               <p>Total Polled: {selected.summary?.polled?.toLocaleString()}</p>
-              <p>Turnout: {selected.summary?.percent_polled}%</p>
+              <p>Percent Polled: {selected.summary?.percent_polled}%</p>
             </div>
 
             <div>
