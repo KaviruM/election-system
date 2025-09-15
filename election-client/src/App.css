@@ -189,6 +189,7 @@ th {
 td {
   padding: 10px;
   border: 1px solid #ddd;
+  color: #000;
 }
 
 tr:nth-child(even) {
@@ -203,35 +204,3 @@ h3 {
   color: #333;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-  
-  .main-content {
-    flex-direction: column;
-  }
-  
-  .districts {
-    max-height: 40vh;
-  }
-  
-  .totals-header {
-    flex-direction: column;
-    gap: 15px;
-    align-items: flex-start;
-  }
-  
-  .totals-cards {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
-  
-  .total-card {
-    padding: 20px;
-  }
-  
-  .total-value {
-    font-size: 24px;
-  }
-}

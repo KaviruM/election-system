@@ -101,7 +101,7 @@ const ElectoralDataViewer = () => {
             <div className="total-value">{totals.totalPolled.toLocaleString()}</div>
           </div>
           <div className="total-card">
-            <div className="total-label">Turnout</div>
+            <div className="total-label">Percent Polled</div>
             <div className="total-value">{totals.percentPolled}%</div>
           </div>
         </div>
