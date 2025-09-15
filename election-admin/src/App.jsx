@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './App.css';
 
 const JsonFileUpload = () => {
   const [connected, setConnected] = useState(false);
@@ -54,10 +55,10 @@ const JsonFileUpload = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div className='container'>
       <h2>Election Data Upload</h2>
       
-      <div style={{ marginBottom: '20px' }}>
+      <div className='status'>
         Status: {connected ? '✅ Connected' : '❌ Disconnected'}
       </div>
 
@@ -66,14 +67,14 @@ const JsonFileUpload = () => {
         accept=".json"
         onChange={handleFileUpload}
         disabled={!connected}
-        style={{ marginBottom: '20px' }}
+        className='file-input'
       />
 
-      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
-      {success && <div style={{ color: 'green', marginBottom: '10px' }}>{success}</div>}
+      {error && <div className='error'>{error}</div>}
+      {success && <div className='success'>{success}</div>}
 
       {uploadedData && (
-        <div style={{ border: '1px solid #ccc', padding: '15px', marginTop: '20px' }}>
+        <div className='uploaded-data'>
           <h3>Uploaded: {uploadedData.ed_name}</h3>
           <p>Code: {uploadedData.ed_code}</p>
           <p>Valid Votes: {uploadedData.summary?.valid?.toLocaleString()}</p>
@@ -82,7 +83,7 @@ const JsonFileUpload = () => {
           <p>Percent Polled: {uploadedData.summary?.percent_polled}%</p>
           <p>Parties: {uploadedData.by_party?.length}</p>
 
-          <div style={{ maxHeight: '200px', overflowY: 'auto', marginTop: '10px' }}>
+          <div className='party-results'>
             <h4>Party Results:</h4>
             <ul>
               {uploadedData.by_party?.map((party) => (
