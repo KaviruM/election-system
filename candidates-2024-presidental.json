@@ -1,0 +1,549 @@
+[
+  {
+    "id": "IND1",
+    "name": {
+      "si": "අක්මීමන දයාරතන හිමි",
+      "en": "Akmeemana Dayarathana Thero"
+    },
+    "party": {
+      "name": "Independent Candidate 1",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "DUA",
+    "name": {
+      "si": "අබුබකර් මොහොමඞ් ඉන්ෆාස්",
+      "en": "Abubakar Mohamed Infas"
+    },
+    "party": {
+      "name": "Democratic Unity Alliance",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND2",
+    "name": {
+      "si": "සිරිපාල අමරසිංහ",
+      "en": "Siripala Amarasinghe"
+    },
+    "party": {
+      "name": "Independent Candidate 2",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND3",
+    "name": {
+      "si": "ඉද්රූස් මොහොමඞ් ඉල්ලයාස්",
+      "en": "Idroos Mohamed Illias"
+    },
+    "party": {
+      "name": "Independent Candidate 3",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND4",
+    "name": {
+      "si": "කේ. කේ. පියදාස​",
+      "en": "K. K. Piyadasa"
+    },
+    "party": {
+      "name": "Independent Candidate 4",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND5",
+    "name": {
+      "si": "සරත් කීර්තිරත්න",
+      "en": "Sarath Keerthirathna"
+    },
+    "party": {
+      "name": "Independent Candidate 5",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND6",
+    "name": {
+      "si": "කේ. ඒ. කුලරත්න",
+      "en": "K. A. Kularatna"
+    },
+    "party": {
+      "name": "Independent Candidate 6",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "APP",
+    "name": {
+      "si": "කේ. ආර්. ක‍්‍රිෂාන්",
+      "en": "K. R. Krishan"
+    },
+    "party": {
+      "name": "Arunalu Peoples Alliance",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND7",
+    "name": {
+      "si": "පල්ලිමුල්ල කපුගමේ අනුර සිඞ්නි ජයරත්න",
+      "en": "Pallimulla Kapugamage Anura Sidney Jayarathna"
+    },
+    "party": {
+      "name": "Independent Candidate 7",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "SLCP",
+    "name": {
+      "si": "දිලිත් ජයවීර",
+      "en": "Dilith Jayaweera"
+    },
+    "party": {
+      "name": "Communist Party of Sri Lanka",
+      "color": [
+        "rgb(218.00, 31.00, 48.00)",
+        "rgb(0.00, 79.00, 146.00)"
+      ]
+    }
+  },
+  {
+    "id": "USP",
+    "name": {
+      "si": "සිරිතුංග ජයසූරිය",
+      "en": "Siritunga Jayasuriya"
+    },
+    "party": {
+      "name": "United Socialist Party",
+      "color": [
+        "rgb(155.00, 0.00, 0.00)",
+        "rgb(155.00, 0.00, 0.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND8",
+    "name": {
+      "si": "මයල්වගනම් තිලකරාජා",
+      "en": "Mylvaganam Thilakarajah"
+    },
+    "party": {
+      "name": "Independent Candidate 8",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "DUNF",
+    "name": {
+      "si": "අගම්පොඩි ප‍්‍රසංග සුරන්ජීව අනෝජ් ද සිල්වා",
+      "en": "Agampodi Prasanga Suranjeewa Anoj De Silva"
+    },
+    "party": {
+      "name": "Democratic United National Front",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "UNFF",
+    "name": {
+      "si": "ලලිත් ද සිල්වා",
+      "en": "Lalith De Silva"
+    },
+    "party": {
+      "name": "United National Freedom Front",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "RJA",
+    "name": {
+      "si": "අජන්ත ද සොයිසා",
+      "en": "Ajantha De Zoysa"
+    },
+    "party": {
+      "name": "Ruhunu Janatha Alliance",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "NPP",
+    "name": {
+      "si": "අනුර කුමාර දිසානායක",
+      "en": "Anura Kumara Dissanayake"
+    },
+    "party": {
+      "name": "Jathika Jana Balawegaya",
+      "color": [
+        "rgb(195.00, 9.00, 74.00)",
+        "rgb(195.00, 9.00, 74.00)"
+      ]
+    }
+  },
+  {
+    "id": "SLSP",
+    "name": {
+      "si": "මහින්ද දේවගේ",
+      "en": "Mahinda Dewage"
+    },
+    "party": {
+      "name": "Socialist Party of Sri Lanka",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND9",
+    "name": {
+      "si": "අරියනේත‍්‍රන් පාක්‍යසෙල්වම්",
+      "en": "Ariyanethiran Pakkiyaselvam"
+    },
+    "party": {
+      "name": "Independent Candidate 9",
+      "color": [
+        "rgb(238.00, 219.00, 2.00)",
+        "rgb(238.00, 219.00, 2.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND10",
+    "name": {
+      "si": "වික්ටර් පෙරේරා",
+      "en": "Victor Perera"
+    },
+    "party": {
+      "name": "Independent Candidate 10",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND11",
+    "name": {
+      "si": "අනුරුද්ධ පොල්ගම්පල",
+      "en": "Anuruddha Polgampala"
+    },
+    "party": {
+      "name": "Independent Candidate 11",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "SJB",
+    "name": {
+      "si": "සජිත් ප්‍රේමදාස",
+      "en": "Sajith Premadasa"
+    },
+    "party": {
+      "name": "Samagi Jana Balawegaya",
+      "color": [
+        "rgb(172.00, 217.00, 58.00)",
+        "rgb(20.00, 133.00, 44.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND12",
+    "name": {
+      "si": "සරත් ෆොන්සේකා",
+      "en": "Sarath Fonseka"
+    },
+    "party": {
+      "name": "Independent Candidate 12",
+      "color": [
+        "rgb(240.00, 189.00, 11.00)",
+        "rgb(214.00, 160.00, 7.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND13",
+    "name": {
+      "si": "දිසානායක මුදියන්සේලාගේ බණ්ඩාරනායක",
+      "en": "Dissanayaka Mudiyanselage Bandaranayake"
+    },
+    "party": {
+      "name": "Independent Candidate 13",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "NDF",
+    "name": {
+      "si": "සරත් බණ්ඩාරනායක",
+      "en": "Sarath Bandaranayake"
+    },
+    "party": {
+      "name": "Jathika Sangwardhena Peramuna",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "JSP",
+    "name": {
+      "si": "බත්තරමුල්ලේ සීලරතන හිමි",
+      "en": "Baththaramulle Seelarathana Thero"
+    },
+    "party": {
+      "name": "Jana Setha Peramuna",
+      "color": [
+        "rgb(222.00, 29.00, 173.00)",
+        "rgb(222.00, 29.00, 173.00)"
+      ]
+    }
+  },
+  {
+    "id": "SPF",
+    "name": {
+      "si": "නුවන් බෝපගේ",
+      "en": "Nuwan Bopege"
+    },
+    "party": {
+      "name": "Socialist People Forum",
+      "color": [
+        "rgb(192.00, 28.00, 36.00)",
+        "rgb(192.00, 28.00, 36.00)"
+      ]
+    }
+  },
+  {
+    "id": "NSU",
+    "name": {
+      "si": "සරත් මනමේන්ද්‍ර",
+      "en": "Sarath Manamendra"
+    },
+    "party": {
+      "name": "Nawa Sihala Urumaya",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND14",
+    "name": {
+      "si": "ප්‍රේමසිරි මානගේ",
+      "en": "Pemasiri Manage"
+    },
+    "party": {
+      "name": "Independent Candidate 14",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND15",
+    "name": {
+      "si": "අනුරුද්ධ රොෂාන් රණසිංහ",
+      "en": "Anuruddha Roshan Ranasinghe"
+    },
+    "party": {
+      "name": "Independent Candidate 15",
+      "color": [
+        "rgb(129.00, 1.00, 172.00)",
+        "rgb(131.00, 3.00, 161.00)"
+      ]
+    }
+  },
+  {
+    "id": "ELPP",
+    "name": {
+      "si": "ජනක රත්නායක",
+      "en": "Janaka Ratnayake"
+    },
+    "party": {
+      "name": "Eksath Lanka Podujana Pakshaya",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "SBP",
+    "name": {
+      "si": "නාමල් රාජපක්‍ෂ",
+      "en": "Namal Rajapaksha"
+    },
+    "party": {
+      "name": "Samabima Party",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "SLPP",
+    "name": {
+      "si": "නාමල් රාජපක්ෂ",
+      "en": "Namal Rajapaksa"
+    },
+    "party": {
+      "name": "Sri Lanka Podujana Peramuna",
+      "color": [
+        "rgb(105.00, 11.00, 9.00)",
+        "rgb(105.00, 11.00, 9.00)"
+      ]
+    }
+  },
+  {
+    "id": "JPF",
+    "name": {
+      "si": "විජයදාස රාජපක්ෂ",
+      "en": "Wijayadasa Rajapakshe"
+    },
+    "party": {
+      "name": "National Democratic Front",
+      "color": [
+        "rgb(40.00, 44.00, 135.00)",
+        "rgb(231.00, 50.00, 35.00)"
+      ]
+    }
+  },
+  {
+    "id": "SLLP",
+    "name": {
+      "si": "ඒ. එස්. පී. ලියනගේ",
+      "en": "A. S. P. Liyanage"
+    },
+    "party": {
+      "name": "Sri Lanka Labour Party",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "AJP",
+    "name": {
+      "si": "කීර්ති වික‍්‍රමරත්න",
+      "en": "Keerthie Wickramaratne"
+    },
+    "party": {
+      "name": "Ape Janabala Pakshaya",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "NSSP",
+    "name": {
+      "si": "ප‍්‍රියන්ත වික‍්‍රමසිංහ",
+      "en": "Priyantha Wickramasinghe"
+    },
+    "party": {
+      "name": "Nawa Sama Samaja Party",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "IND16",
+    "name": {
+      "si": "රනිල් වික‍්‍රමසිංහ",
+      "en": "Ranil Wikremesinghe"
+    },
+    "party": {
+      "name": "Independent Candidate 16",
+      "color": [
+        "rgb(182.00, 41.00, 47.00)",
+        "rgb(250.00, 204.00, 42.00)",
+        "rgb(0.00, 80.00, 58.00)"
+      ]
+    }
+  },
+  {
+    "id": "SEP",
+    "name": {
+      "si": "පානි විජේසිරිවර්ධන",
+      "en": "Pani Wijesiriwardena"
+    },
+    "party": {
+      "name": "Socialist Equality Party",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  },
+  {
+    "id": "NIF",
+    "name": {
+      "si": "ඕෂල හේරත්",
+      "en": "Oshala Herath"
+    },
+    "party": {
+      "name": "New Independent Front",
+      "color": [
+        "rgb(106.00, 106.00, 106.00)",
+        "rgb(28.00, 28.00, 28.00)"
+      ]
+    }
+  }
+]
