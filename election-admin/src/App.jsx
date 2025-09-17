@@ -31,38 +31,22 @@ const JsonFileUpload = () => {
   }, []);
 
   const detectResultType = (jsonData) => {
-    // Use the level field to determine type (primary method)
+    // Electoral district
     if (jsonData.level === 'ELECTORAL-DISTRICT') {
       return 'ED';
     }
-    
+
+    // Polling division
     if (jsonData.level === 'POLLING-DIVISION') {
       return 'PD';
     }
     
+    // Postal votes
     if (jsonData.level === 'POSTAL-VOTE') {
       return 'PV';
     }
     
-    // Fallback to old detection method if level field is not present
-    if (jsonData.result_type === 'postal' || 
-        jsonData.type === 'postal' || 
-        (jsonData.pd_name && jsonData.pd_name.toLowerCase().includes('postal')) ||
-        (jsonData.ed_name && jsonData.ed_name.toLowerCase().includes('postal'))) {
-      return 'PV'; // Postal Votes
-    }
-    
-    // Check if it has polling division data (pd_code exists)
-    if (jsonData.pd_code) {
-      return 'PD'; // Polling Division
-    }
-    
-    // If it has ed_code and summary but no pd_code, it's likely electoral district final
-    if (jsonData.ed_code && jsonData.summary && !jsonData.pd_code) {
-      return 'ED'; // Electoral District Final
-    }
-    
-    // Default fallback
+    // Default
     return 'UNKNOWN';
   };
 

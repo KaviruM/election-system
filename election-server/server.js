@@ -59,7 +59,7 @@ wss.on('connection', (client) => {
 
           const districtCode = jsonData.ed_code;
           
-          // Initialize district if needed
+          // Initialize district type
           if (!electoralDataStore[districtCode]) {
             electoralDataStore[districtCode] = {
               district_name: jsonData.ed_name || jsonData.district_name,
