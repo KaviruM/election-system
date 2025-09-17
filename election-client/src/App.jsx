@@ -40,23 +40,27 @@ const ElectoralDataViewer = () => {
     }
   };
 
-  useEffect(() => {
-    wsRef.current = new WebSocket("ws://localhost:3001");
+ useEffect(() => {
+    wsRef.current = new WebSocket('ws://localhost:3001');
 
     wsRef.current.onopen = () => setConnected(true);
     wsRef.current.onclose = () => setConnected(false);
+    wsRef.current.onerror = () => setError('Connection failed');
 
     wsRef.current.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      if (data.type === "initial_data" || data.type === "update") {
-        setDistricts(data.data);
-        const total = data.data.reduce((sum, district) => sum + district.summary?.valid || 0, 0);
-        setTotalVotes(total);
+      if (data.type === 'upload_success') {
+        setSuccess(`${data.resultType} data uploaded successfully for ${data.districtName}!`);
+        setUploadedData(data.uploadedData);
+        setDetectedType(data.resultType);
+      } else if (data.type === 'error') {
+        setError(data.message);
       }
     };
 
     return () => wsRef.current?.close();
   }, []);
+;
 
   if (!connected) {
     return <div className="connection">Connecting to server...</div>;
