@@ -1,35 +1,33 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
+import colors from '../../candidates-2024-presidental.json';
 
 const ElectoralDataViewer = () => {
   const [connected, setConnected] = useState(false);
   const [districts, setDistricts] = useState([]);
   const [selected, setSelected] = useState(null);
-  const [totalView, setTotalView] = useState("island");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [totalView, setTotalView] = useState('island');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const wsRef = useRef(null);
 
-  useEffect(() => {
-    const ws = new WebSocket("ws://localhost:3001");
+
+    useEffect(() => {
+    const ws = new WebSocket('ws://localhost:3001');
 
     ws.onopen = () => setConnected(true);
     ws.onclose = () => setConnected(false);
-    ws.onerror = () => setError("Connection failed");
+    ws.onerror = () => setError('Connection failed');
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
-
-      if (data.type === "initial_data" || data.type === "data_update") {
-        const transformedDistricts = transformServerData(
-          data.electoralData || {}
-        );
+      
+      if (data.type === 'initial_data' || data.type === 'data_update') {
+        const transformedDistricts = transformServerData(data.electoralData || {});
         setDistricts(transformedDistricts);
-      } else if (data.type === "upload_success") {
-        setSuccess(
-          `${data.resultType} data uploaded successfully for ${data.districtName}!`
-        );
-      } else if (data.type === "error") {
+      } else if (data.type === 'upload_success') {
+        setSuccess(`${data.resultType} data uploaded successfully for ${data.districtName}!`);
+      } else if (data.type === 'error') {
         setError(data.message);
       }
     };
@@ -38,23 +36,28 @@ const ElectoralDataViewer = () => {
     return () => ws.close();
   }, []);
 
+
+
   const transformServerData = (serverData) => {
-    if (!serverData || typeof serverData !== "object") {
+    if (!serverData || typeof serverData !== 'object') {
       return [];
     }
-
-    return Object.keys(serverData).map((districtCode) => {
+    
+    return Object.keys(serverData).map(districtCode => {
       const districtData = serverData[districtCode];
       return {
         ed_code: districtCode,
-        ed_name: districtData.district_name || "Unknown District",
+        ed_name: districtData.district_name || 'Unknown District',
         ed_results: districtData.ED || null,
         pv_results: Object.values(districtData.PV || {})[0] || null,
-        pd_results: Object.values(districtData.PD || {}) || [],
+        pd_results: Object.values(districtData.PD || {}) || []
       };
     });
   };
 
+
+
+  // Calculate district totals
   const calculateDistrictTotals = (district) => {
     // if ED results exist
     if (district.ed_results && district.ed_results.summary) {
@@ -86,7 +89,7 @@ const ElectoralDataViewer = () => {
 
     // Add Polling Division Results (PD)
     if (district.pd_results && Array.isArray(district.pd_results)) {
-      district.pd_results.forEach((pd) => {
+      district.pd_results.forEach(pd => {
         if (pd.summary) {
           total.validVotes += pd.summary.valid || 0;
           total.rejectedVotes += pd.summary.rejected || 0;
@@ -97,13 +100,14 @@ const ElectoralDataViewer = () => {
     }
 
     // Calculate percentage
-    total.percentPolled =
-      total.totalVoters > 0
-        ? ((total.totalPolled / total.totalVoters) * 100).toFixed(2)
-        : 0;
+    total.percentPolled = total.totalVoters > 0 ? 
+      ((total.totalPolled / total.totalVoters) * 100).toFixed(2) : 0;
 
     return total;
   };
+
+
+
 
   // Calculate island totals
   const calculateIslandTotals = (districts) => {
@@ -115,7 +119,7 @@ const ElectoralDataViewer = () => {
       percentPolled: 0,
     };
 
-    districts.forEach((district) => {
+    districts.forEach(district => {
       // Check if district has final ED result
       if (district.ed_results && district.ed_results.summary) {
         // Use Electoral District final result
@@ -134,10 +138,8 @@ const ElectoralDataViewer = () => {
     });
 
     // Calculate percentage
-    totals.percentPolled =
-      totals.totalVoters > 0
-        ? ((totals.totalPolled / totals.totalVoters) * 100).toFixed(2)
-        : 0;
+    totals.percentPolled = totals.totalVoters > 0 ? 
+      ((totals.totalPolled / totals.totalVoters) * 100).toFixed(2) : 0;
 
     return totals;
   };
@@ -145,7 +147,7 @@ const ElectoralDataViewer = () => {
   // Calculate totals
   const calculateTotals = () => {
     // district total calculation
-    if (totalView === "district" && selected) {
+    if (totalView === 'district' && selected) {
       return calculateDistrictTotals(selected);
     } else {
       // Island total calculation
@@ -153,68 +155,131 @@ const ElectoralDataViewer = () => {
     }
   };
 
+
+  // Get top 5 candidates (island)
+  const getTopCandidates = (islandWide = false, district = null) => {
+    let candidates = [];
+    
+    if (islandWide) {
+      const candidateMap = {};
+      districts.forEach(district => {
+        let districtCandidates = [];
+        if (district.ed_results && district.ed_results.by_party) {
+          districtCandidates = district.ed_results.by_party;
+        } else if (district.pv_results && district.pv_results.by_party) {
+          districtCandidates = district.pv_results.by_party;
+        } else if (district.pd_results && district.pd_results.length > 0 && district.pd_results[0].by_party) {
+          districtCandidates = district.pd_results[0].by_party;
+        }
+
+        districtCandidates.forEach(party => {
+          if (!candidateMap[party.candidate]) {
+            candidateMap[party.candidate] = { ...party };
+          } else {
+            candidateMap[party.candidate].votes += party.votes || 0;
+          }
+        });
+      });
+
+      candidates = Object.values(candidateMap);
+    } else if (district) {
+      if (district.ed_results && district.ed_results.by_party) {
+        candidates = district.ed_results.by_party;
+      } else if (district.pv_results && district.pv_results.by_party) {
+        candidates = district.pv_results.by_party;
+      } else if (district.pd_results && district.pd_results.length > 0 && district.pd_results[0].by_party) {
+        candidates = district.pd_results[0].by_party;
+      }
+    }
+
+    // Sort top 5
+    candidates.sort((a, b) => b.votes - a.votes);
+    return candidates.slice(0, 5);
+  };
+
+  // Get candidate official color
+  const getCandidateColor = (candidateColor) => {
+    return colors[candidateColor] || "#c7c6c6ff";
+  };
+
+
+
   if (!connected) {
     return (
       <div className="connection">
         Connecting to server...
-        {error && (
-          <div style={{ color: "red", marginTop: "10px" }}>Error: {error}</div>
-        )}
+        {error && <div style={{color: 'red', marginTop: '10px'}}>Error: {error}</div>}
       </div>
     );
   }
 
   const totals = calculateTotals();
+  const topCandidates = getTopCandidates(totalView === 'island', selected);
 
   return (
+    
     <div className="container">
       <div className="totals-section">
         <div className="totals-header">
           <h2>Electoral Results</h2>
           <div className="total-buttons">
-            <button
-              className={`total-btn ${totalView === "island" ? "active" : ""}`}
-              onClick={() => setTotalView("island")}
+            <button 
+              className={`total-btn ${totalView === 'island' ? 'active' : ''}`}
+              onClick={() => setTotalView('island')}
             >
               Island Totals
             </button>
-            <button
-              className={`total-btn ${
-                totalView === "district" ? "active" : ""
-              }`}
-              onClick={() => setTotalView("district")}
+            <button 
+              className={`total-btn ${totalView === 'district' ? 'active' : ''}`}
+              onClick={() => setTotalView('district')}
               disabled={!selected}
             >
               District Totals
             </button>
           </div>
         </div>
+        
 
         <div className="totals-cards">
           <div className="total-card">
             <div className="total-label">Valid Votes</div>
-            <div className="total-value">
-              {totals.validVotes.toLocaleString()}
-            </div>
+            <div className="total-value">{totals.validVotes.toLocaleString()}</div>
           </div>
           <div className="total-card">
             <div className="total-label">Rejected Votes</div>
-            <div className="total-value">
-              {totals.rejectedVotes.toLocaleString()}
-            </div>
+            <div className="total-value">{totals.rejectedVotes.toLocaleString()}</div>
           </div>
           <div className="total-card">
             <div className="total-label">Total Polled</div>
-            <div className="total-value">
-              {totals.totalPolled.toLocaleString()}
-            </div>
+            <div className="total-value">{totals.totalPolled.toLocaleString()}</div>
           </div>
           <div className="total-card">
             <div className="total-label">Percent Polled</div>
             <div className="total-value">{totals.percentPolled}%</div>
           </div>
         </div>
+
+
+        <div className="topfive-candidates">
+          <h3>Top 5 Candidates {totalView === 'island' ? 'Island-wide' : selected ? `in ${selected.ed_name}` : ''}</h3>
+          <div className="candidates-cards">
+            {topCandidates.map((candidate, index) => (
+              <div key={index} className="candidate-card" style={{ backgroundColor: getCandidateColor(candidate.party_color) }}>
+                <div className="candidate-rank">{index + 1}</div>
+                <div className="candidate-info">
+                  <div className="candidate-name">{candidate.candidate}</div>
+                  <div className="candidate-party">{candidate.party_name}</div>
+                </div>
+                <div className="candidate-stats">
+                  <div className="candidate-votes">{candidate.votes?.toLocaleString()}</div>
+                  <div className="candidate-percentage">{candidate.percentage}%</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
 
       <div className="main-content">
         <div className="districts">
@@ -235,78 +300,56 @@ const ElectoralDataViewer = () => {
           })}
         </div>
 
+
         <div className="charts">
           {selected ? (
             <div>
               <h2>{selected.ed_name}</h2>
               <div>Code: {selected.ed_code}</div>
-
+              
               <div className="details">
                 <h3>Summary</h3>
                 <div className="summary-grid">
                   <div className="summary-card">
                     <div className="summary-label">Valid Votes</div>
-                    <div className="summary-value">
-                      {calculateDistrictTotals(
-                        selected
-                      ).validVotes?.toLocaleString()}
-                    </div>
+                    <div className="summary-value">{calculateDistrictTotals(selected).validVotes?.toLocaleString()}</div>
                   </div>
                   <div className="summary-card">
                     <div className="summary-label">Rejected Votes</div>
-                    <div className="summary-value">
-                      {calculateDistrictTotals(
-                        selected
-                      ).rejectedVotes?.toLocaleString()}
-                    </div>
+                    <div className="summary-value">{calculateDistrictTotals(selected).rejectedVotes?.toLocaleString()}</div>
                   </div>
                   <div className="summary-card">
                     <div className="summary-label">Total Polled</div>
-                    <div className="summary-value">
-                      {calculateDistrictTotals(
-                        selected
-                      ).totalPolled?.toLocaleString()}
-                    </div>
+                    <div className="summary-value">{calculateDistrictTotals(selected).totalPolled?.toLocaleString()}</div>
                   </div>
                   <div className="summary-card">
                     <div className="summary-label">Percent Polled</div>
-                    <div className="summary-value">
-                      {calculateDistrictTotals(selected).percentPolled}%
-                    </div>
+                    <div className="summary-value">{calculateDistrictTotals(selected).percentPolled}%</div>
                   </div>
                 </div>
               </div>
 
               <div>
                 <h3>Top Candidates</h3>
-                <table style={{ width: "100%", borderCollapse: "collapse" }}>
-                  <thead>
-                    <tr>
-                      <th style={{ padding: "8px" }}>Candidate</th>
-                      <th style={{ padding: "8px" }}>Party</th>
-                      <th style={{ padding: "8px" }}>Votes</th>
-                      <th style={{ padding: "8px" }}>%</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selected.by_party?.slice(0, 5).map((party, i) => (
-                      <tr key={i}>
-                        <td style={{ padding: "8px" }}>{party.candidate}</td>
-                        <td style={{ padding: "8px" }}>{party.party_name}</td>
-                        <td style={{ padding: "8px" }}>
-                          {party.votes?.toLocaleString()}
-                        </td>
-                        <td style={{ padding: "8px" }}>{party.percentage}%</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <div className="candidates-cards">
+                  {getTopCandidates(false, selected).map((candidate, index) => (
+                    <div key={index} className="candidate-card">
+                      <div className="candidate-rank">{index + 1}</div>
+                      <div className="candidate-info">
+                        <div className="candidate-name">{candidate.candidate}</div>
+                        <div className="candidate-party">{candidate.party_name}</div>
+                      </div>
+                      <div className="candidate-stats">
+                        <div className="candidate-votes">{candidate.votes?.toLocaleString()}</div>
+                        <div className="candidate-percentage">{candidate.percentage}%</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ) : (
-            <div
-              style={{ textAlign: "center", marginTop: "100px", color: "#666" }}
-            >
+            <div style={{ textAlign: "center", marginTop: "100px", color: "#666" }}>
               Select a district to view details
             </div>
           )}

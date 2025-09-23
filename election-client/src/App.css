@@ -203,4 +203,92 @@ h2 {
 h3 {
   color: #333;
 }
+p {
+  color: #555;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+} 
 
+.candidates-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.candidate-card {
+  background: #ffffff;
+  border: 1px solid #e0e4e7;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-card:hover {
+  border-color: #4285f4;
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.15);
+  transform: translateY(-1px);
+}
+
+.candidate-rank {
+  background: #4285f4;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.candidate-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.candidate-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candidate-party {
+  font-size: 14px;
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.candidate-stats {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.candidate-votes {
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.candidate-percentage {
+  font-size: 14px;
+  color: #4285f4;
+  font-weight: 500;
+}
