@@ -198,8 +198,22 @@ const ElectoralDataViewer = () => {
   };
 
   // Get candidate official color
-  const getCandidateColor = (candidateColor) => {
-    return colors[candidateColor] || "#c7c6c6ff";
+  const getCandidateColor = (candidate) => {
+    if (!candidate) return "#c7c6c6ff";
+    // Try to match by candidate id or name
+    let found = colors.find(
+      c => (c.id && candidate.candidate_id && c.id === candidate.candidate_id) ||
+           (c.name && c.name.en && candidate.candidate && c.name.en === candidate.candidate)
+    );
+    // fallback: try by party name
+    if (!found && candidate.party_name) {
+      found = colors.find(c => c.party && c.party.name === candidate.party_name);
+    }
+    // Use first color if available
+    if (found && found.party && Array.isArray(found.party.color) && found.party.color.length > 0) {
+      return found.party.color[0];
+    }
+    return "#c7c6c6ff";
   };
 
 
@@ -264,7 +278,7 @@ const ElectoralDataViewer = () => {
           <h3>Top 5 Candidates {totalView === 'island' ? 'Island-wide' : selected ? `in ${selected.ed_name}` : ''}</h3>
           <div className="candidates-cards">
             {topCandidates.map((candidate, index) => (
-              <div key={index} className="candidate-card" style={{ backgroundColor: getCandidateColor(candidate.party_color) }}>
+              <div key={index} className="candidate-card" style={{ backgroundColor: getCandidateColor(candidate) }}>
                 <div className="candidate-rank">{index + 1}</div>
                 <div className="candidate-info">
                   <div className="candidate-name">{candidate.candidate}</div>
