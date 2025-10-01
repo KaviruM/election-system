@@ -5,7 +5,7 @@ const JsonFileUpload = () => {
   const [connected, setConnected] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [uploadedData, setUploadedData] = useState(null);
+  const [uploadedData, setUploadedData] = useState([]);
   const wsRef = useRef(null);
   const [detectedType, setDetectedType] = useState(null); // PV, PD, ED
 
@@ -20,7 +20,7 @@ const JsonFileUpload = () => {
       const data = JSON.parse(event.data);
       if (data.type === 'upload_success') {
         setSuccess(`${data.resultType} data uploaded successfully for ${data.districtName}!`);
-        setUploadedData(data.uploadedData);
+        setUploadedData((prev) => [...prev, data.uploadedData]);
         setDetectedType(data.resultType);
       } else if (data.type === 'error') {
         setError(data.message);
@@ -51,35 +51,39 @@ const JsonFileUpload = () => {
   };
 
   const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
+    const files = event.target.files; //
+    if (!files.length) return;
 
-    if (!file.name.endsWith('.json')) {
-      setError('Please select a JSON file');
-      return;
-    }
+    Array.from(files).forEach((file) => { 
+      if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const jsonData = JSON.parse(e.target.result);
-        const resultType = detectResultType(jsonData);
-        
-        setDetectedType(resultType);
-        
-        wsRef.current.send(JSON.stringify({
-          type: 'election_data_upload',
-          fileName: file.name,
-          jsonData,
-          resultType
-        }));
-        setError('');
-        setSuccess('');
-      } catch {
-        setError('Invalid JSON file');
+      if (!file.name.endsWith('.json')) {
+        setError('Please select a JSON file');
+        return;
       }
-    };
-    reader.readAsText(file);
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const jsonData = JSON.parse(e.target.result);
+          const resultType = detectResultType(jsonData);
+          
+          setDetectedType(resultType);
+          
+          wsRef.current.send(JSON.stringify({
+            type: 'election_data_upload',
+            fileName: file.name,
+            jsonData,
+            resultType
+          }));
+          setError('');
+          setSuccess('');
+        } catch {
+          setError('Invalid JSON file');
+        }
+      };
+      reader.readAsText(file);
+    });
   };
 
   return (
@@ -99,6 +103,7 @@ const JsonFileUpload = () => {
       <input
         type="file"
         accept=".json"
+        multiple 
         onChange={handleFileUpload}
         disabled={!connected}
         className='file-input'
@@ -107,27 +112,32 @@ const JsonFileUpload = () => {
       {error && <div className='error'>{error}</div>}
       {success && <div className='success'>{success}</div>}
 
-      {uploadedData && (
+      {uploadedData.length > 0 && (
         <div className='uploaded-data'>
-          <h3>Uploaded: {uploadedData.ed_name || uploadedData.pd_name || 'Unknown'}</h3>
-          <p>Type: {detectedType} - {detectedType === 'PV' ? 'Postal Votes' : detectedType === 'PD' ? 'Polling Division' : detectedType === 'ED' ? 'Electoral District (Final)' : 'Unknown Type'}</p>
-          <p>Code: {uploadedData.ed_code || uploadedData.pd_code}</p>
-          <p>Valid Votes: {uploadedData.summary?.valid?.toLocaleString()}</p>
-          <p>Rejected Votes: {uploadedData.summary?.rejected?.toLocaleString()}</p>
-          <p>Total Polled: {uploadedData.summary?.polled?.toLocaleString()}</p>
-          <p>Percent Polled: {uploadedData.summary?.percent_polled}%</p>
-          <p>Parties: {uploadedData.by_party?.length}</p>
+          <h3>Uploaded Files</h3>
+          {uploadedData.map((data, index) => (
+            <div key={index} className='uploaded-file'>
+              <h4>Uploaded: {data.ed_name || data.pd_name || 'Unknown'}</h4>
+              <p>Type: {detectedType} - {detectedType === 'PV' ? 'Postal Votes' : detectedType === 'PD' ? 'Polling Division' : detectedType === 'ED' ? 'Electoral District (Final)' : 'Unknown Type'}</p>
+              <p>Code: {data.ed_code || data.pd_code}</p>
+              <p>Valid Votes: {data.summary?.valid?.toLocaleString()}</p>
+              <p>Rejected Votes: {data.summary?.rejected?.toLocaleString()}</p>
+              <p>Total Polled: {data.summary?.polled?.toLocaleString()}</p>
+              <p>Percent Polled: {data.summary?.percent_polled}%</p>
+              <p>Parties: {data.by_party?.length}</p>
 
-          <div className='party-results'>
-            <h4>Party Results:</h4>
-            <ul>
-              {uploadedData.by_party?.map((party) => (
-                <li key={party.party_name}>
-                  {party.candidate}: {party.votes.toLocaleString()} votes ({party.percentage}%)
-                </li>
-              ))}
-            </ul>
-          </div>
+              <div className='party-results'>
+                <h4>Party Results:</h4>
+                <ul>
+                  {data.by_party?.map((party) => (
+                    <li key={party.party_name}>
+                      {party.candidate}: {party.votes.toLocaleString()} votes ({party.percentage}%)
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>

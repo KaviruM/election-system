@@ -43,6 +43,7 @@ import SLSP from "../symbols/SLSP.png";
 import SPF from "../symbols/SPF.png";
 import UNFF from "../symbols/UNFF.png";
 import USP from "../symbols/USP.png";
+import { IslandMap } from "./islandMap";
 
 
 // Symbol mapping object
@@ -229,11 +230,6 @@ const ElectoralDataViewer = () => {
       }
     });
 
-    // Calculate percentage
-    totals.percentPolled =
-      totals.totalVoters > 0
-        ? ((totals.totalPolled / totals.totalVoters) * 100).toFixed(2)
-        : 0;
 
     return totals;
   };
@@ -372,7 +368,9 @@ const ElectoralDataViewer = () => {
   const topCandidates = getTopCandidates(totalView === "island", selected);
 
   return (
+    
     <div className="container">
+      
       <div className="totals-section">
         <div className="totals-header">
           <h2>Electoral Results</h2>
@@ -418,6 +416,7 @@ const ElectoralDataViewer = () => {
             <div className="total-label">Percent Polled</div>
             <div className="total-value">{totals.percentPolled}%</div>
           </div>
+          
         </div>
 
         <div className="topfive-candidates">
@@ -452,13 +451,11 @@ const ElectoralDataViewer = () => {
                   <div className="candidate-votes">
                     {candidate.votes?.toLocaleString()}
                   </div>
-                  <div className="candidate-percentage">
-                    {candidate.percentage}%
-                  </div>
                 </div>
               </div>
             ))}
           </div>
+           <IslandMap districts={districts} />
         </div>
       </div>
 
