@@ -455,7 +455,7 @@ const ElectoralDataViewer = () => {
               </div>
             ))}
           </div>
-           <IslandMap districts={districts} />
+           <IslandMap className="island-map" districts={districts} />
         </div>
       </div>
 

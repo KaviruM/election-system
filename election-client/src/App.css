@@ -320,3 +320,33 @@ button:disabled {
   color: #4285f4;
   font-weight: 500;
 }
+
+
+.island-map {
+  flex: 1;
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.island-map svg {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #f9f9f9;
+}
+
+.district-path {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1;
+  transition: fill 0.3s, stroke 0.3s;
+  cursor: pointer;
+}
